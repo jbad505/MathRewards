@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
 
     /*
       Class Scope Containers
-     */
+    */
 
     /* Store answers */
     protected ArrayList<Integer> answers = new ArrayList<>();
@@ -33,27 +33,28 @@ public class MainActivity extends Activity {
     /*
       The points contained in the index that is equal to the user
       level is awarded when a equation is answered correctly
-     */
+    */
     protected int[] pointsAwardedContainer = new int[]{
             1, 3, 5, 8, 10, 12, 15, 20
     };
 
     /*
-      Class scope vars
-     */
+      Class Scope Variables
+    */
 
-    /* A reference to the correct answers location */
+    /* The correct answers location */
     protected int locationOfCorrectAnswer;
 
     /*
-      The starbarCounter is incremented or decremented depending if
+      starbarCounter
+      The counter is incremented or decremented depending if
       a equation was answered correctly or incorrectly
       The value contained in the starbarCounter is used to
       turn golden stars visible or invisible
       The starbarCounter is also used to determine if a user level
       should be incremented or decremented based on the amount of
       equations answered correctly or incorrectly
-     */
+    */
     protected int starbarCounter;
 
     /* START ONCREATE METHOD */
@@ -66,9 +67,11 @@ public class MainActivity extends Activity {
     } /* END ONCREATE METHOD */
 
     /*
-      BUTTON PRESSED
-      Do this when a button is pressed
-     */
+      buttonPressed
+      Get tag of button pressed
+      Convert integer to string
+      Test against locationOfCorrectAnswer
+    */
     public void buttonPressed(View view) {
         /* Check if button selected contains the correct answer */
         if (view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
@@ -95,7 +98,7 @@ public class MainActivity extends Activity {
             /*
               Check for a integer before subtracting
               user level to avoid exception
-             */
+            */
             if (starbarCounter == 0) {
                 if (currentLevelNum > 1) {
                     levelDownController();
@@ -105,7 +108,7 @@ public class MainActivity extends Activity {
             /*
               Check for a integer before decrementing
               counter to avoid exception
-             */
+            */
             if (starbarCounter >= 1) {
                 this.starbarCounter--;
                 /* Make grey star visible */
@@ -120,7 +123,7 @@ public class MainActivity extends Activity {
       starOnController
       Set golden star to visible
       Set grey star to invisible
-     */
+   */
     public void starOnController(int count) {
         /* Set star ID's */
         View starOn = findViewById(starOnIdContainer[count]);
@@ -134,7 +137,7 @@ public class MainActivity extends Activity {
       starOffController
       Set grey star to visible
       Set golden star to invisible
-     */
+    */
     public void starOffController(int count) {
         /* Set star ID's */
         View starOn = findViewById(starOnIdContainer[count]);
@@ -147,7 +150,7 @@ public class MainActivity extends Activity {
     /*
       pointsController
       Increase current user points for each correct answer
-     */
+    */
     public void pointsController() {
         /* Set current level ID */
         TextView currentLevel = findViewById(R.id.current_level);
@@ -170,9 +173,11 @@ public class MainActivity extends Activity {
     } // End method
 
     /*
-      The starBarCounter is reset to zero
+      The starbarResetController
+      Reset the starbar
       All golden stars are made invisible
-     */
+      All grey stars are made visible
+    */
     public void starbarResetController() {
         /* Reset stars in starbar */
         int i = 0;
@@ -190,7 +195,7 @@ public class MainActivity extends Activity {
     /*
       levelUpController
       Add to the current user level for a correct answer
-     */
+    */
     public void levelUpController() {
         /* Set current level ID */
         TextView currentLevel = findViewById(R.id.current_level);
@@ -205,7 +210,7 @@ public class MainActivity extends Activity {
     /*
       levelDownController
       Subtract from the current user level for a incorrect answer
-     */
+    */
     public void levelDownController() {
         /* Set current level ID */
         TextView currentLevel = findViewById(R.id.current_level);
@@ -219,8 +224,8 @@ public class MainActivity extends Activity {
 
     /*
       generateEquation
-      Generate a new equation when a answer is chosen
-     */
+      Generates a new equation
+    */
     public void generateEquation() {
         /* Clear ArrayList */
         answers.clear();
@@ -234,11 +239,10 @@ public class MainActivity extends Activity {
         /* Generate random number */
         Random rand = new Random();
 
-        /*
-          Generate random numbers in range 1-100 for MainActivity equation
-         */
+        /* Generate random number in range 1-100 */
         int num1 = rand.nextInt(101);
         int num2 = rand.nextInt(101);
+        /* Add to get correct answer */
         int correctAnswer = num1 + num2;
         /* Generate random number for location of the correct answer */
         locationOfCorrectAnswer = rand.nextInt(4);
@@ -251,14 +255,14 @@ public class MainActivity extends Activity {
             if (i == locationOfCorrectAnswer) {
                 answers.add(correctAnswer);
             } else {
-                incorrectAnswer = rand.nextInt(201);
+                incorrectAnswer = rand.nextInt(202);
 
                 /*
                   Check if incorrect answer is equal to the correct
                   answer generate a new incorrect answer
                 */
                 while (incorrectAnswer == correctAnswer) {
-                    incorrectAnswer = rand.nextInt(201);
+                    incorrectAnswer = rand.nextInt(202);
                 } // End while
                 answers.add(incorrectAnswer);
             } // End if else
@@ -273,4 +277,3 @@ public class MainActivity extends Activity {
         mainButton3.setText(Integer.toString(answers.get(3)));
     } // End method
 } // End class
-
