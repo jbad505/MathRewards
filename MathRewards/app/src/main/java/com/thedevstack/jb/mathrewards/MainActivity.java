@@ -121,9 +121,7 @@ public class MainActivity extends Activity {
       Set golden star to invisible
     */
     public void starOffController(int starbarCounter) {
-//        /* Set star ID's */
-//        View starOn = findViewById(starOnIdContainer[starbarCounter]);
-//        View starOff = findViewById(starOffIdContainer[starbarCounter]);
+        /* Set star ID's */
         starID(starbarCounter);
         /* Set star visibility */
         starOn.setVisibility(View.INVISIBLE);
@@ -141,8 +139,7 @@ public class MainActivity extends Activity {
         int i = 0;
         while (i < starOnIdContainer.length) {
             /* Set star ID's */
-            View starOn = findViewById(starOnIdContainer[i]);
-            View starOff = findViewById(starOffIdContainer[i]);
+            starID(i);
             /* Set visibility */
             starOn.setVisibility(View.INVISIBLE);
             starOff.setVisibility(View.VISIBLE);
