@@ -271,12 +271,12 @@ public class MainActivity extends Activity {
 
     /*
       generateEquation
-      Generates a new equation
+      Generates a new math equation
     */
     public void generateEquation() {
         /* Clear ArrayList */
         answers.clear();
-        /* Generate random number */
+        /* Instantiate random */
         Random rand = new Random();
 
         /* Generate random number in range 1-100 */
@@ -298,8 +298,8 @@ public class MainActivity extends Activity {
                 incorrectAnswer = rand.nextInt(202);
 
                 /*
-                  Check if incorrect answer is equal to the correct
-                  answer generate a new incorrect answer
+                  If incorrect answer is equal to the correct answer
+                  generate a new incorrect answer
                 */
                 while (incorrectAnswer == correctAnswer) {
                     incorrectAnswer = rand.nextInt(202);
