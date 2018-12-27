@@ -57,14 +57,155 @@ public class MainActivity extends Activity {
     */
     protected int starbarCounter;
 
+    /* Button */
+    Button mainButton0;
+    Button mainButton1;
+    Button mainButton2;
+    Button mainButton3;
+
+    /* TextView */
+    TextView currentLevel;
+    TextView currentPoints;
+    TextView currentEquation;
+
+    /* View */
+    View starOn;
+    View starOff;
+
     /* START ONCREATE METHOD */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Set Button ID's */
+        mainButton0 = findViewById(R.id.main_button0);
+        mainButton1 = findViewById(R.id.main_button1);
+        mainButton2 = findViewById(R.id.main_button2);
+        mainButton3 = findViewById(R.id.main_button3);
+        /* Set current level ID */
+        currentLevel = findViewById(R.id.current_level);
+        /* Set current points ID */
+        currentPoints = findViewById(R.id.current_points);
+        /* Set current equation ID */
+        currentEquation = findViewById(R.id.current_equation);
         /* Generates the initial equation when app launches */
         generateEquation();
     } /* END ONCREATE METHOD */
+
+    /*
+      starID
+      Set star ID's based on counter value
+    */
+    public void starID(int counter) {
+        /* Set star ID's */
+        starOn = findViewById(starOnIdContainer[counter]);
+        starOff = findViewById(starOffIdContainer[counter]);
+    } // End method
+
+    /*
+      starOnController
+      Set golden star to visible
+      Set grey star to invisible
+   */
+    public void starOnController(int starbarCounter) {
+        starID(starbarCounter);
+        /* Set star visibility */
+        starOn.setVisibility(View.VISIBLE);
+        starOff.setVisibility(View.INVISIBLE);
+    } // End method
+
+    /*
+      starOffController
+      Set grey star to visible
+      Set golden star to invisible
+    */
+    public void starOffController(int starbarCounter) {
+//        /* Set star ID's */
+//        View starOn = findViewById(starOnIdContainer[starbarCounter]);
+//        View starOff = findViewById(starOffIdContainer[starbarCounter]);
+        starID(starbarCounter);
+        /* Set star visibility */
+        starOn.setVisibility(View.INVISIBLE);
+        starOff.setVisibility(View.VISIBLE);
+    } // End method
+
+    /*
+      The starbarResetController
+      Reset the starbar
+      All golden stars are made invisible
+      All grey stars are made visible
+    */
+    public void starbarResetController() {
+        /* Reset stars in starbar */
+        int i = 0;
+        while (i < starOnIdContainer.length) {
+            /* Set star ID's */
+            View starOn = findViewById(starOnIdContainer[i]);
+            View starOff = findViewById(starOffIdContainer[i]);
+            /* Set visibility */
+            starOn.setVisibility(View.INVISIBLE);
+            starOff.setVisibility(View.VISIBLE);
+            i++; /* Increment i */
+        } // End while
+    } // End method
+
+    /*
+      currentLevelNum
+      Set the current user level as an integer
+    */
+    public int currentLevelNum() {
+        /* Convert currentLevelNum to integer */
+        return Integer.parseInt(currentLevel.getText().toString());
+    } // End method
+
+    /*
+      currentPointsNum
+      Set the current user points as an integer
+    */
+    public int currentPointsNum() {
+        /* Set current amount of user points */
+        return Integer.parseInt(currentPoints.getText().toString());
+    } // End method
+
+    /*
+      pointsController
+      Increase current user points for each correct answer
+    */
+    public void pointsController() {
+        for (int i = 0; i < currentLevelNum(); i++) {
+
+            /*
+              Points per answer is based on user level and is
+              added to the current amount of user points
+            */
+            int points = currentPointsNum() + pointsAwardedContainer[i];
+            /* Update the points value with the added points */
+            currentPoints.setText(Integer.toString(points));
+        } // End for
+    } // End method
+
+    /*
+      levelUpController
+      Add to the current user level for a correct answer
+    */
+    public void levelUpController() {
+        /* Add one from current user level */
+        int newLevel = currentLevelNum() + 1;
+        /* Set new level */
+        currentLevel.setText(Integer.toString(newLevel));
+    } // End method
+
+    /*
+      levelDownController
+      Subtract from the current user level for a incorrect answer
+    */
+    public void levelDownController() {
+        /* Subtract one from current user level */
+        int newLevel = currentLevelNum() - 1;
+        /* Set new level */
+        currentLevel.setText(Integer.toString(newLevel));
+    } // End method
 
     /*
       buttonPressed
@@ -90,8 +231,6 @@ public class MainActivity extends Activity {
             }
             /* Generate next equation */
         } else {
-            /* Get ID for user current level */
-            TextView currentLevel = findViewById(R.id.current_level);
             /* Parse the integer out of the string */
             int currentLevelNum = Integer.parseInt(currentLevel.getText().toString());
 
@@ -120,107 +259,18 @@ public class MainActivity extends Activity {
     } // End method
 
     /*
-      starOnController
-      Set golden star to visible
-      Set grey star to invisible
-   */
-    public void starOnController(int count) {
-        /* Set star ID's */
-        View starOn = findViewById(starOnIdContainer[count]);
-        View starOff = findViewById(starOffIdContainer[count]);
-        /* Set star visibility */
-        starOn.setVisibility(View.VISIBLE);
-        starOff.setVisibility(View.INVISIBLE);
-    } // End method
-
-    /*
-      starOffController
-      Set grey star to visible
-      Set golden star to invisible
+      setButtonText
+      Get button ID's
+      Convert integer to string
+      Set button text
     */
-    public void starOffController(int count) {
-        /* Set star ID's */
-        View starOn = findViewById(starOnIdContainer[count]);
-        View starOff = findViewById(starOffIdContainer[count]);
-        /* Set star visibility */
-        starOn.setVisibility(View.INVISIBLE);
-        starOff.setVisibility(View.VISIBLE);
-    } // End method
-
-    /*
-      pointsController
-      Increase current user points for each correct answer
-    */
-    public void pointsController() {
-        /* Set current level ID */
-        TextView currentLevel = findViewById(R.id.current_level);
-        /* Set current level */
-        int currentLevelNum = Integer.parseInt(currentLevel.getText().toString());
-        /* Set current points ID */
-        TextView currentPoints = findViewById(R.id.current_points);
-        /* Set current amount of user points */
-        int currentPointsNum = Integer.parseInt(currentPoints.getText().toString());
-        for (int i = 0; i < currentLevelNum; i++) {
-
-            /*
-              Points per answer is based on user level and is
-              added to the current amount of user points
-            */
-            int points = currentPointsNum + pointsAwardedContainer[i];
-            /* Update the points value with the added points */
-            currentPoints.setText(Integer.toString(points));
-        } // End for
-    } // End method
-
-    /*
-      The starbarResetController
-      Reset the starbar
-      All golden stars are made invisible
-      All grey stars are made visible
-    */
-    public void starbarResetController() {
-        /* Reset stars in starbar */
-        int i = 0;
-        while (i < starOnIdContainer.length) {
-            /* Set star ID's */
-            View starOn = findViewById(starOnIdContainer[i]);
-            View starOff = findViewById(starOffIdContainer[i]);
-            /* Set visibility */
-            starOn.setVisibility(View.INVISIBLE);
-            starOff.setVisibility(View.VISIBLE);
-            i++; /* Increment i */
-        } // End while
-    } // End method
-
-    /*
-      levelUpController
-      Add to the current user level for a correct answer
-    */
-    public void levelUpController() {
-        /* Set current level ID */
-        TextView currentLevel = findViewById(R.id.current_level);
-        /* Set current level */
-        int currentLevelNum = Integer.parseInt(currentLevel.getText().toString());
-        /* Add one from current user level */
-        int newLevel = currentLevelNum + 1;
-        /* Set new level */
-        currentLevel.setText(Integer.toString(newLevel));
-    } // End method
-
-    /*
-      levelDownController
-      Subtract from the current user level for a incorrect answer
-    */
-    public void levelDownController() {
-        /* Set current level ID */
-        TextView currentLevel = findViewById(R.id.current_level);
-        /* Set current level */
-        int currentLevelNum = Integer.parseInt(currentLevel.getText().toString());
-        /* Subtract one from current user level */
-        int newLevel = currentLevelNum - 1;
-        /* Set new level */
-        currentLevel.setText(Integer.toString(newLevel));
-    } // End method
+    public void setButtonText() {
+        /* Set button text from array index */
+        mainButton0.setText(Integer.toString(answers.get(0)));
+        mainButton1.setText(Integer.toString(answers.get(1)));
+        mainButton2.setText(Integer.toString(answers.get(2)));
+        mainButton3.setText(Integer.toString(answers.get(3)));
+    }// End method
 
     /*
       generateEquation
@@ -229,13 +279,6 @@ public class MainActivity extends Activity {
     public void generateEquation() {
         /* Clear ArrayList */
         answers.clear();
-        /* Button ID's */
-        Button mainButton0 = findViewById(R.id.main_button0);
-        Button mainButton1 = findViewById(R.id.main_button1);
-        Button mainButton2 = findViewById(R.id.main_button2);
-        Button mainButton3 = findViewById(R.id.main_button3);
-        /* Set current equation ID */
-        TextView currentEquation = findViewById(R.id.current_equation);
         /* Generate random number */
         Random rand = new Random();
 
@@ -267,13 +310,7 @@ public class MainActivity extends Activity {
                 answers.add(incorrectAnswer);
             } // End if else
         } // End for
-
-        /*
-          Set button text from array index
-        */
-        mainButton0.setText(Integer.toString(answers.get(0)));
-        mainButton1.setText(Integer.toString(answers.get(1)));
-        mainButton2.setText(Integer.toString(answers.get(2)));
-        mainButton3.setText(Integer.toString(answers.get(3)));
+        /* Set button text from array index */
+        setButtonText();
     } // End method
 } // End class
