@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">MathRewards</string>
+
+    <string name="starbar">starbar</string>
+    <string name="starbar_layout">starbar_layout</string>
+    <string name="buttonLayout">button_layout</string>
+    <string name="main_button0">main_button0</string>
+    <string name="main_button1">main_button1</string>
+    <string name="main_button2">main_button2</string>
+    <string name="main_button3">main_button3</string>
+    <string name="button0_name">button0</string>
+    <string name="button1_name">Button1</string>
+    <string name="button2_name">Button2</string>
+    <string name="button3_name">Button3</string>
+    <string name="Equation">0 + 0</string>
+    <string name="starbar_display">Starbar display</string>
+    <string name="golden_star_0">Golden star 0</string>
+    <string name="golden_star_1">Golden star 1</string>
+    <string name="golden_star_2">Golden star 2</string>
+    <string name="golden_star_3">Golden star 3</string>
+    <string name="golden_star_4">Golden star 4</string>
+    <string name="grey_star_0">Grey star 0</string>
+    <string name="grey_star_1">Grey star 1</string>
+    <string name="grey_star_2">Grey star 2</string>
+    <string name="grey_star_3">Grey star 3</string>
+    <string name="grey_star_4">Grey star 4</string>
+    <string name="points">PTS</string>
+    <string name="points_num">0</string>
+    <string name="level">LVL</string>
+    <string name="level_num">1</string>
+    <string name="submit">submit</string>
+    <string name="not_a_member">Not a member?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="click_here">CLICK HERE</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="todo">TODO</string>
+
+</resources>
