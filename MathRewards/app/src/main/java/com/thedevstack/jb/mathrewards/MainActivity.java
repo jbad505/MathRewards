@@ -149,18 +149,18 @@ public class MainActivity extends Activity {
 
     /*
       currentLevelNum
-      Set the current user level as an integer
+      Return the current user level as an integer
     */
-    public int currentLevelNum() {
+    public int getCurrentLevelNum() {
         /* Convert currentLevelNum to integer */
         return Integer.parseInt(currentLevel.getText().toString());
     } // End method
 
     /*
       currentPointsNum
-      Set the current user points as an integer
+      Return the current user points as an integer
     */
-    public int currentPointsNum() {
+    public int getCurrentPointsNum() {
         /* Set current amount of user points */
         return Integer.parseInt(currentPoints.getText().toString());
     } // End method
@@ -170,13 +170,13 @@ public class MainActivity extends Activity {
       Increase current user points for each correct answer
     */
     public void pointsController() {
-        for (int i = 0; i < currentLevelNum(); i++) {
+        for (int i = 0; i < getCurrentLevelNum(); i++) {
 
             /*
               Points per answer is based on user level and is
               added to the current amount of user points
             */
-            int points = currentPointsNum() + pointsAwardedContainer[i];
+            int points = getCurrentPointsNum() + pointsAwardedContainer[i];
             /* Update the points value with the added points */
             currentPoints.setText(Integer.toString(points));
         } // End for
@@ -188,7 +188,7 @@ public class MainActivity extends Activity {
     */
     public void levelUpController() {
         /* Add one from current user level */
-        int newLevel = currentLevelNum() + 1;
+        int newLevel = getCurrentLevelNum() + 1;
         /* Set new level */
         currentLevel.setText(Integer.toString(newLevel));
     } // End method
@@ -199,7 +199,7 @@ public class MainActivity extends Activity {
     */
     public void levelDownController() {
         /* Subtract one from current user level */
-        int newLevel = currentLevelNum() - 1;
+        int newLevel = getCurrentLevelNum() - 1;
         /* Set new level */
         currentLevel.setText(Integer.toString(newLevel));
     } // End method
