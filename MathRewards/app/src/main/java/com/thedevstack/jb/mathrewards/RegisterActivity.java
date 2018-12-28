@@ -1,6 +1,7 @@
 package com.thedevstack.jb.mathrewards;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,71 +12,90 @@ import java.util.Locale;
 
 public class RegisterActivity extends Activity {
 
+    /* Class Scope */
+
+    /* EditText */
+    private EditText nameID ,emailID, passwordID, confirmPasswordID;
+
+    /* String */
+    String name, email, password, confirmPassword;
+
+    /* START ON CREATE METHOD */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-
+        /* Set field ID's */
+        nameID = findViewById(R.id.name_field);
+        emailID = findViewById(R.id.email_field);
+        passwordID = findViewById(R.id.password_field);
+        confirmPasswordID = findViewById(R.id.confirm_password_field);
     }
-    // TODO: Add Comments To Class CredentialValidation
-    class CredentialValidation {
+    /* END ON CREATE METHOD */
 
-        EditText nameField = findViewById(R.id.name_field);
-        EditText emailField = findViewById(R.id.email_field);
-        EditText passwordField = findViewById(R.id.password_field);
-        EditText confirmPasswordField = findViewById(R.id.confirm_password_field);
+    /*
+      fieldValidator
+      Check fields are not empty
+      Check password length
+      Check password matches confirmPassword
+    */
+    public boolean validateFields() {
 
-        String name = nameField.getText().toString();
-        String email = emailField.getText().toString();
-        String password = passwordField.getText().toString();
-        String confirmPassword = confirmPasswordField.getText().toString();
+        /* Set string value from ID */
+        name = nameID.getText().toString().trim();
+        email = emailID.getText().toString().trim();
+        password = passwordID.getText().toString().trim();
+        confirmPassword = confirmPasswordID.getText().toString().trim();
 
-        private boolean validateFields() {
+        /* Validate name field is not empty */
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(RegisterActivity.this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
 
-            return TextUtils.isEmpty(name) || TextUtils.isEmpty(email)
-                    || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword);
-        }
+            return true;
+        } // End if
 
-        private boolean doPasswordsMatch() {
-            if (password.equals(confirmPassword)) {
+        /* Validate email field is not empty */
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(RegisterActivity.this, "Please Enter Your Email", Toast.LENGTH_SHORT).show();
+            return true;
+        } // End if
 
-                Toast.makeText(RegisterActivity.this, "DO NOT MATCH", Toast.LENGTH_LONG).show();
-                return true;
-            }
-            return false;
-        }
+        /*
+          Validate password field is not empty
+          Check passwords length is 8 characters or more
+        */
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(RegisterActivity.this, "Please Enter A Password", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (password.length() < 8) {
+            Toast.makeText(RegisterActivity.this, "Password Must Be 8 Characters or Longer", Toast.LENGTH_SHORT).show();
+            return true;
+        } // End if
 
-        private boolean isPasswordLongEnough() {
-            if (password.length() >= 8) {
+        /*
+          Validate confirmPassword field is not empty
+          Check password matches confirmPassword
+        */
+        if (TextUtils.isEmpty(confirmPassword)) {
+            Toast.makeText(RegisterActivity.this, "Please Confirm Your Password", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (!password.equals(confirmPassword)) {
+            Toast.makeText(RegisterActivity.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
+            return true;
+        } // End if
 
-                Toast.makeText(RegisterActivity.this, "PASSWORD MUST BE A MINIMUM OF 8 CHARACTERS", Toast.LENGTH_LONG).show();
-                return true;
-            } else {
-                Toast.makeText(RegisterActivity.this, "SUBMITTED", Toast.LENGTH_LONG).show();
-            }
-            return false;
-        }
-    }
+        Toast.makeText(RegisterActivity.this, "Thank You For Signing Up " + name + "!", Toast.LENGTH_SHORT).show();
+        return false;
+    } // End method
 
-    public void run(View view) {
-        CredentialValidation credentialValidation = new CredentialValidation();
-
-        boolean allFields = credentialValidation.validateFields();
-        if (!allFields) {
-            boolean matchPasswords = credentialValidation.doPasswordsMatch();
-            if (matchPasswords) {
-                boolean passwordLongEnough = credentialValidation.isPasswordLongEnough();
-                if (passwordLongEnough) {
-                    Toast.makeText(RegisterActivity.this, "Hey it worked!!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Password not long enough", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Toast.makeText(RegisterActivity.this, "All fields required", Toast.LENGTH_LONG).show();
-        }
-    }
+    /*
+      validateFileds
+      Call validateFields
+     */
+    public void registerUser(View view) {
+        if (!validateFields()) {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }  // End if
+    } // End method
 }

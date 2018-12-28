@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
     } // End method
 
     /*
-      currentLevelNum
+      getCurrentLevelNum
       Return the current user level as an integer
     */
     public int getCurrentLevelNum() {
@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
     } // End method
 
     /*
-      currentPointsNum
+      getCurrentPointsNum
       Return the current user points as an integer
     */
     public int getCurrentPointsNum() {
@@ -226,24 +226,21 @@ public class MainActivity extends Activity {
                 /* Check the amount of golden stars */
                 levelUpController();
             }
-            /* Generate next equation */
         } else {
-            /* Parse the integer out of the string */
-            int currentLevelNum = Integer.parseInt(currentLevel.getText().toString());
 
             /*
-              Check for a integer before subtracting
-              user level to avoid exception
+              Check for a positive integer before
+              subtracting user level to avoid exception
             */
             if (starbarCounter == 0) {
-                if (currentLevelNum > 1) {
+                if (getCurrentLevelNum() > 1) {
                     levelDownController();
                 } // End if
             } // End if
 
             /*
-              Check for a integer before decrementing
-              counter to avoid exception
+              Check for a positive integer before
+              decrementing counter to avoid exception
             */
             if (starbarCounter >= 1) {
                 this.starbarCounter--;
