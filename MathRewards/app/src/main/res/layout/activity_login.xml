@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorEdgeEffect"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -11,7 +12,7 @@
         android:id="@+id/login_button_layout"
         android:layout_width="0dp"
         android:layout_height="208dp"
-        android:background="?android:attr/colorBackground"
+        android:background="?android:attr/colorEdgeEffect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,8 +26,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="?android:attr/colorAccent"
-            android:text="@string/submit"
             android:onClick="submit"
+            android:text="@string/submit"
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:typeface="sans"
@@ -117,7 +118,7 @@
         android:layout_width="0dp"
         android:layout_height="212dp"
         android:layout_marginTop="16dp"
-        android:background="?android:attr/colorBackground"
+        android:background="?android:attr/colorEdgeEffect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,6 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="65dp"
             android:layout_marginTop="8dp"
+            android:autofillHints=""
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:hint="@string/email"
@@ -140,14 +142,14 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            android:autofillHints="" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
             android:id="@+id/login_password_field"
             android:layout_width="0dp"
             android:layout_height="65dp"
             android:layout_marginBottom="48dp"
+            android:autofillHints=""
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:hint="@string/password"
@@ -158,49 +160,48 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            android:autofillHints="" />
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
-<android.support.constraint.ConstraintLayout
-android:id="@+id/login_message_layout"
-android:layout_width="0dp"
-android:layout_height="200dp"
-android:background="?android:attr/colorBackground"
-app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="0.0"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintVertical_bias="0.0">
-
-    <ImageView
-        android:id="@+id/mathrewards_logo"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/login_message_layout"
         android:layout_width="0dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/mathrewardslogo"
-        app:layout_constraintBottom_toTopOf="@+id/signup_substring"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
-
-    <ImageView
-        android:id="@+id/signup_substring"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/signin"
+        android:layout_height="200dp"
+        android:background="?android:attr/colorEdgeEffect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="TODO" />
-</android.support.constraint.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
+        <ImageView
+            android:id="@+id/mathrewards_logo"
+            android:layout_width="0dp"
+            android:layout_height="113dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/mathrewardslogo"
+            app:layout_constraintBottom_toTopOf="@+id/signup_substring"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/signup_substring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/signin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -3,16 +3,27 @@ package com.thedevstack.jb.mathrewards;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Locale;
+
+import static android.content.ContentValues.TAG;
 
 public class RegisterActivity extends Activity {
 
     /* Class Scope */
+
+    private FirebaseAuth mAuth;
 
     /* EditText */
     private EditText nameID ,emailID, passwordID, confirmPasswordID;
@@ -25,6 +36,8 @@ public class RegisterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuth = FirebaseAuth.getInstance();
         /* Set field ID's */
         nameID = findViewById(R.id.name_field);
         emailID = findViewById(R.id.email_field);
@@ -32,6 +45,17 @@ public class RegisterActivity extends Activity {
         confirmPasswordID = findViewById(R.id.confirm_password_field);
     }
     /* END ON CREATE METHOD */
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null).
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
 
     /*
       fieldValidator
@@ -48,15 +72,16 @@ public class RegisterActivity extends Activity {
         confirmPassword = confirmPasswordID.getText().toString().trim();
 
         /* Validate name field is not empty */
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(RegisterActivity.this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
-
+        if (name.isEmpty()) {
+            nameID.setError("Name Is Required");
+            nameID.requestFocus();
             return true;
         } // End if
 
         /* Validate email field is not empty */
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(RegisterActivity.this, "Please Enter Your Email", Toast.LENGTH_SHORT).show();
+        if (email.isEmpty()) {
+            emailID.setError("Email Is Required");
+            emailID.requestFocus();
             return true;
         } // End if
 
@@ -64,27 +89,31 @@ public class RegisterActivity extends Activity {
           Validate password field is not empty
           Check passwords length is 8 characters or more
         */
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(RegisterActivity.this, "Please Enter A Password", Toast.LENGTH_SHORT).show();
+        if (password.isEmpty()) {
+            passwordID.setError("Password Is Required");
+            passwordID.requestFocus();
             return true;
         } else if (password.length() < 8) {
-            Toast.makeText(RegisterActivity.this, "Password Must Be 8 Characters or Longer", Toast.LENGTH_SHORT).show();
+            passwordID.setError("Password Length Must Be At Least 8 Characters");
             return true;
-        } // End if
+        }
 
         /*
           Validate confirmPassword field is not empty
           Check password matches confirmPassword
         */
-        if (TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(RegisterActivity.this, "Please Confirm Your Password", Toast.LENGTH_SHORT).show();
+        if (confirmPassword.isEmpty()) {
+            confirmPasswordID.setError("Confirm Password Is Required");
+            confirmPasswordID.requestFocus();
             return true;
         } else if (!password.equals(confirmPassword)) {
-            Toast.makeText(RegisterActivity.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
+            confirmPasswordID.setError("Passwords Do Not Match");
+            confirmPasswordID.requestFocus();
             return true;
-        } // End if
+        }
 
-        Toast.makeText(RegisterActivity.this, "Thank You For Signing Up " + name + "!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegisterActivity.this,
+                "Welcome To MathRewards \n Thank You For Signing Up " + name + "!", Toast.LENGTH_SHORT).show();
         return false;
     } // End method
 
