@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -83,7 +84,11 @@ public class RegisterActivity extends Activity {
             emailID.setError("Email Is Required");
             emailID.requestFocus();
             return true;
-        } // End if
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailID.setError("You Entered An Invalid Email Address");
+            emailID.requestFocus();
+            return true;
+        }
 
         /*
           Validate password field is not empty

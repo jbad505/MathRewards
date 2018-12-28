@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "224232919174",
+    "firebase_url": "https://mathrewards-45a63.firebaseio.com",
+    "project_id": "mathrewards-45a63",
+    "storage_bucket": "mathrewards-45a63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224232919174:android:957c8be6fdcf3483",
+        "android_client_info": {
+          "package_name": "com.thedevstack.jb.mathrewards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224232919174-nj0l4ndk35u6vein810l3dmm8adp0bqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thedevstack.jb.mathrewards",
+            "certificate_hash": "b0c38a88858df55475b7b373e5f72d41214c82ac"
+          }
+        },
+        {
+          "client_id": "224232919174-sd62fgd1p9lj0peqdt674hef7oh716ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2La4Pf7qXzYpwFg85BP_PEuJqewRgIzU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224232919174-sd62fgd1p9lj0peqdt674hef7oh716ct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
